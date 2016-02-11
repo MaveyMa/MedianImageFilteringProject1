@@ -1,0 +1,98 @@
+#NAME: MAVEY MA
+#DUE: FRIDAY, FEBRUARY 12, 2016
+#CST205: AVNER, PROJECT 1
+#GROUP 7
+#READS IN 9 PHOTOS AND REMOVES PESKY TOURIST.
+
+#from pprint import pprint
+#HOW WIDE TAKES IN A PICTURE AND RETURNS AN INTEGER (WIDTH)
+def howWide(photoYouChoose):
+  width = getWidth(photoYouChoose)
+  return width
+   
+#HOW HIGH TAKES IN A PICTURE AND RETURNS AN INTEGER (HEIGHT)
+def howHigh(photoYouChoose):
+  height = getHeight(photoYouChoose)
+  return height
+  
+#SORTS LIST AND RETURNS MIDDLE ELEMENT
+def medianOdd(myList):
+  listLength = len(myList)
+  sortedValues = sorted(myList)
+  middleIndex = ((listLength+1)/2) - 1
+  return sortedValues[middleIndex]
+
+#ACCEPTS THREE RBG AND CREATES NEW COLOR
+def makeNewColor(ohRed, ohGreen, ohBlue):
+  newColor = makeColor(ohRed, ohGreen, ohBlue)
+  return newColor
+
+pictures = []
+folder = "/home/copypasta/CST205/Project1Images/Project1Images/"
+
+pic1 = makePicture(folder + "1.png")
+pictures.append(pic1)
+pic2 = makePicture(folder + "2.png")
+pictures.append(pic2)
+pic3 = makePicture(folder + "3.png")
+pictures.append(pic3)
+pic4 = makePicture(folder + "4.png")
+pictures.append(pic4)
+pic5 = makePicture(folder + "5.png")
+pictures.append(pic5)
+pic6 = makePicture(folder + "6.png")
+pictures.append(pic6)
+pic7 = makePicture(folder + "7.png")
+pictures.append(pic7)
+pic8 = makePicture(folder + "8.png")
+pictures.append(pic8)
+pic9 = makePicture(folder + "9.png")
+pictures.append(pic9)
+
+#STORE OFFICIAL HEIGHT AND WIDTH.
+officialWidth = howWide(pic1) #495
+officialHeight = howHigh(pic1) #557
+
+#LIST TO STORE 
+rojoPixList = []
+verdePixList = []
+azulPixList = []
+
+finalPhoto = makeEmptyPicture(officialWidth, officialHeight)
+
+for x in range (0, officialWidth):
+  for y in range (0, officialHeight):
+    for index in range(0,9):
+      pixel = getPixel(pictures[index],x,y)
+      
+      rojo = getRed(pixel)
+      verde = getGreen(pixel)
+      azul = getBlue(pixel)
+      
+      rojoPixList.append(rojo)
+      verdePixList.append(verde)
+      azulPixList.append(azul)
+      
+      sorted(rojoPixList)
+      sorted(verdePixList)
+      sorted(azulPixList)
+      
+    rePix = medianOdd(rojoPixList)
+    grPix= medianOdd(verdePixList)
+    blPix = medianOdd(azulPixList)
+      
+    finalColor = makeNewColor(rePix, grPix, blPix)
+      
+    finalPixel = getPixel(finalPhoto,x,y)
+      
+    setColor(finalPixel, finalColor)
+
+    rojoPixList[:] = []
+    verdePixList[:] = []
+    azulPixList[:] = []
+      
+show(finalPhoto)
+  
+  
+  
+  
